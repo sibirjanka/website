@@ -25,20 +25,28 @@
     }
 
     body {
-      font-family: 'lora', serif;
-      background: linear-gradient(
-        to bottom,
-        var(--bg-dark) 0%,
-        var(--bg-mid) 45%,
-        var(--bg-light) 100%
-      );
-      background-attachment: fixed;
-      color: var(--text-main);
-      line-height: 1.9;
-      text-align: center;
-      text-transform: lowercase;
-      overflow-x: hidden;
-    }
+  font-family: 'lora', serif;
+  background: none;             
+  color: var(--text-main);
+  line-height: 1.9;
+  text-align: center;
+  text-transform: lowercase;
+  overflow-x: hidden;
+}
+
+.background-gradient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background: linear-gradient(
+    to bottom,
+    var(--bg-dark) 0%,
+    var(--bg-mid) 45%,
+    var(--bg-light) 100%
+  );
+}
 
     section {
       padding: 110px 10%;
@@ -232,6 +240,7 @@
 </head>
 
 <body>
+  <div class="background-gradient"></div>
 
   <!-- hero -->
   <section class="hero">
