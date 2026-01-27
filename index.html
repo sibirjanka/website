@@ -11,11 +11,11 @@
   <style>
     :root {
       --bg-dark: #0a0a0e;
-      --bg-mid: #1c1530;
-      --bg-light: #8a79dd; /* helleres, klares flieder */
-      --text-main: #f6f4fb;
-      --text-soft: #e4def6;
-      --accent: #d9ceff;
+      --bg-mid: #201433;
+      --bg-light: #b996d9; /* helleres, rosigeres flieder */
+      --text-main: #f7f5fb;
+      --text-soft: #e8e2f4;
+      --accent: #e3cfff;
     }
 
     * {
@@ -36,6 +36,7 @@
       line-height: 1.9;
       text-align: center;
       text-transform: lowercase;
+      overflow-x: hidden;
     }
 
     section {
@@ -49,8 +50,11 @@
     }
 
     h1 {
-      font-size: 6rem; /* größer für mehr impact */
-      margin-bottom: 26px;
+      font-size: 6.8rem;
+      margin-bottom: 20px;
+      position: relative;
+      top: -20px; /* leicht höher */
+      z-index: 2;
       white-space: nowrap;
     }
 
@@ -77,19 +81,62 @@
       border-bottom: 1px solid var(--accent);
     }
 
-    /* hero */
+    /* fade-in animation */
+    .fade {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* hero + fog */
     .hero {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fog {
+      position: absolute;
+      top: -20%;
+      left: -30%;
+      width: 160%;
+      height: 160%;
+      background: radial-gradient(
+        ellipse at center,
+        rgba(150, 110, 190, 0.35),
+        rgba(60, 40, 90, 0.25),
+        transparent 70%
+      );
+      filter: blur(120px);
+      z-index: 1;
+      animation: fogMove 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes fogMove {
+      from { transform: translateX(0); }
+      to { transform: translateX(120px); }
     }
 
     .subtitle {
       font-size: 1.6rem;
       margin-bottom: 60px;
       color: var(--text-soft);
+      z-index: 2;
+    }
+
+    .buttons {
+      z-index: 2;
     }
 
     .buttons a {
@@ -99,18 +146,30 @@
       text-transform: lowercase;
     }
 
-    /* about poem */
+    /* about */
+    .about-poem img {
+      width: 180px;
+      border-radius: 50%;
+      margin-bottom: 40px;
+    }
+
     .about-poem p {
       white-space: pre-line;
-      line-height: 2.6; /* mehr luft zwischen den strophen */
+      line-height: 1.9;
       font-size: 1.05rem;
     }
 
     /* poems */
     .poems img {
-      width: 220px;
-      margin: 14px;
-      border-radius: 18px;
+      width: 320px; /* größer für bessere lesbarkeit */
+      margin: 18px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .poems img:hover {
+      transform: scale(1.03);
     }
 
     /* books */
@@ -125,7 +184,6 @@
     }
 
     .book-title {
-      font-family: 'lora', serif;
       font-weight: 700;
       margin-bottom: 16px;
     }
@@ -139,7 +197,10 @@
       font-weight: 700;
     }
 
-    /* footer */
+    .legal-link {
+      margin-top: 40px;
+    }
+
     footer {
       padding: 80px 10%;
       font-size: 0.8rem;
@@ -148,7 +209,7 @@
 
     @media (max-width: 768px) {
       h1 {
-        font-size: 4.4rem;
+        font-size: 4.6rem;
       }
 
       .subtitle {
@@ -158,6 +219,10 @@
       section {
         padding: 90px 8%;
       }
+
+      .poems img {
+        width: 90%;
+      }
     }
   </style>
 </head>
@@ -166,10 +231,12 @@
 
   <!-- hero -->
   <section class="hero">
-    <h1>ya sama</h1>
-    <div class="subtitle">poetry & music enthusiast</div>
+    <div class="fog"></div>
 
-    <div class="buttons">
+    <h1 class="fade">ya sama</h1>
+    <div class="subtitle fade">poetry & music enthusiast</div>
+
+    <div class="buttons fade">
       <a href="#about">about</a>
       <a href="#poems">poems</a>
       <a href="#books">books</a>
@@ -177,8 +244,11 @@
   </section>
 
   <!-- about -->
-  <section id="about" class="about-poem">
+  <section id="about" class="about-poem fade">
     <h2>about</h2>
+
+    <img src="portrait.png" alt="portrait of ya sama">
+
     <p>
 a girl from berlin
 with a heart full of lyrics and letters
@@ -188,20 +258,16 @@ in a heart of someone else
   </section>
 
   <!-- poems -->
-  <section id="poems" class="poems">
+  <section id="poems" class="poems fade">
     <h2>poems</h2>
 
     <img src="poem1.jpg" alt="poem">
     <img src="poem2.jpg" alt="poem">
     <img src="poem3.jpg" alt="poem">
-
-    <p>
-      <a href="https://instagram.com" target="_blank">visit instagram</a>
-    </p>
   </section>
 
   <!-- books -->
-  <section id="books">
+  <section id="books" class="fade">
     <h2>books</h2>
 
     <p>
@@ -229,7 +295,7 @@ in a heart of someone else
   </section>
 
   <!-- boring part -->
-  <section class="boring">
+  <section class="boring fade">
     <h2>the boring part</h2>
 
     <p><strong>impressum</strong></p>
@@ -247,8 +313,11 @@ in a heart of someone else
       e-mail: yasama@yasama.de
     </p>
 
-    
-    <p><strong>haftungsausschluss & datenschutzerklärung</strong></p>
+    <p class="legal-link">
+      <strong>
+        <a href="datenschutz.pdf">haftungsausschluss & datenschutzerklärung</a>
+      </strong>
+    </p>
   </section>
 
   <footer>
