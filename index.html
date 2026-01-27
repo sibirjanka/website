@@ -6,278 +6,259 @@
   <title>ya sama</title>
 
   <!-- fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Germania+One&family=Lora:wght@700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Germania+One&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --text-main: #f5f0f8;
+      --text-soft: #d8cfe6;
+      --accent: #e2c6f2;
+    }
+
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      color: #f5f5f5;
+      margin: 0;
+      font-family: 'Lora', serif;
       background: linear-gradient(
         to bottom,
-        #000000 0%,
-        #1b0f1f 35%,
-        #3a1f3f 65%,
-        #d8b6e8 100%
+        #0a0a0f 0%,
+        #1b1224 35%,
+        #3a234a 70%,
+        #6f4f7f 100%
       );
-      min-height: 100vh;
-      overflow-x: hidden;
+      color: var(--text-main);
+      text-align: center;
+      line-height: 1.7;
     }
 
     section {
-      padding: 5rem 1.5rem;
-      text-align: center;
-    }
-
-    h1, h2 {
-      font-family: 'Germania One', cursive;
-      letter-spacing: 1px;
-    }
-
-    h2 {
-      font-size: 2.2rem;
-      margin-bottom: 2rem;
-    }
-
-    .fade {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeIn 1.2s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      padding: 90px 20px;
+      position: relative;
     }
 
     /* hero */
     .hero {
+      padding-top: 120px;
+      padding-bottom: 140px;
       position: relative;
-      padding-top: 6rem;
-      padding-bottom: 6rem;
       overflow: hidden;
     }
 
-    .fog {
-      position: absolute;
-      top: 45%;
-      left: 50%;
-      width: 500px;
-      height: 300px;
-      transform: translate(-50%, -50%);
-      background:
-        radial-gradient(circle at 40% 50%, rgba(220,170,255,0.45), transparent 60%),
-        radial-gradient(circle at 60% 50%, rgba(200,150,240,0.35), transparent 65%);
-      filter: blur(70px);
-      animation: fogMove 12s ease-in-out infinite alternate;
-      z-index: 0;
-    }
-
-    .fog::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle, rgba(255,220,255,0.6) 1px, transparent 2px);
-      background-size: 80px 80px;
-      opacity: 0.25;
-      animation: glitter 8s linear infinite;
-    }
-
-    @keyframes fogMove {
-      from { transform: translate(-50%, -55%) scale(1); }
-      to { transform: translate(-50%, -45%) scale(1.1); }
-    }
-
-    @keyframes glitter {
-      from { background-position: 0 0; }
-      to { background-position: 100px 200px; }
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
-
     .hero h1 {
-      font-size: clamp(4.5rem, 9vw, 6.5rem);
-      margin-bottom: 1rem;
-      transform: translateY(-10px);
+      font-family: 'Germania One', serif;
+      font-size: clamp(3.8rem, 8vw, 5.6rem);
+      margin: 0;
+      position: relative;
+      z-index: 2;
     }
 
     .subtitle {
       font-size: 1.4rem;
-      margin-bottom: 3rem;
-      opacity: 0.9;
+      margin-top: 14px;
+      color: var(--text-soft);
+      z-index: 2;
+      position: relative;
     }
 
-    .links a {
+    .buttons {
+      margin-top: 50px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .buttons a {
       display: inline-block;
-      margin: 0.4rem;
-      padding: 0.6rem 1.4rem;
-      border: 1px solid rgba(255,255,255,0.4);
-      border-radius: 999px;
+      margin: 0 14px;
+      padding: 12px 22px;
+      border: 1px solid var(--text-soft);
+      color: var(--text-main);
       text-decoration: none;
-      color: #fff;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
       transition: all 0.3s ease;
     }
 
-    .links a:hover {
-      background: rgba(255,255,255,0.15);
+    .buttons a:hover {
+      background: var(--accent);
+      color: #0a0a0f;
+    }
+
+    /* dramatic fog */
+    .fog {
+      position: absolute;
+      top: 48%;
+      left: 50%;
+      width: 620px;
+      height: 380px;
+      transform: translate(-50%, -50%);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(210,170,235,0.6), transparent 60%),
+        radial-gradient(circle at 45% 55%, rgba(170,120,200,0.45), transparent 68%),
+        radial-gradient(circle at 55% 45%, rgba(130,80,165,0.35), transparent 75%);
+      filter: blur(95px);
+      opacity: 0.95;
+      pointer-events: none;
+      animation: fogFloat 16s ease-in-out infinite alternate;
+      z-index: 1;
+    }
+
+    .fog::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle, rgba(255,235,255,0.8) 1px, transparent 2px);
+      background-size: 90px 90px;
+      opacity: 0.28;
+      animation: glitterMove 12s linear infinite;
+    }
+
+    @keyframes fogFloat {
+      from {
+        transform: translate(-50%, -52%) scale(1);
+      }
+      to {
+        transform: translate(-50%, -48%) scale(1.12);
+      }
+    }
+
+    @keyframes glitterMove {
+      from {
+        background-position: 0 0;
+      }
+      to {
+        background-position: 140px 220px;
+      }
     }
 
     /* about */
-    .portrait {
-      width: 260px;
+    .about img {
+      width: 220px;
       max-width: 80%;
-      border-radius: 12px;
-      margin-bottom: 2rem;
+      border-radius: 2px;
+      margin-bottom: 40px;
     }
 
-    .poem-text {
+    .about p {
+      max-width: 520px;
+      margin: 0 auto;
       line-height: 1.4;
       white-space: pre-line;
-      font-size: 1.05rem;
     }
 
     /* poems */
-    .poems-grid {
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .poems-grid img {
-      width: 320px;
-      max-width: 90%;
+    .poems img {
+      width: 90%;
+      max-width: 720px;
+      margin: 30px auto;
+      display: block;
       cursor: pointer;
       transition: transform 0.3s ease;
     }
 
-    .poems-grid img:hover {
-      transform: scale(1.03);
+    .poems img:hover {
+      transform: scale(1.02);
     }
 
-    .instagram {
-      margin-top: 2rem;
-      font-size: 0.95rem;
+    .instagram-link {
+      margin-top: 40px;
+      display: block;
+      color: var(--text-soft);
+      text-decoration: none;
+      letter-spacing: 0.1em;
     }
-
-    /* lightbox */
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.9);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-    }
-
-    .lightbox img {
-      max-width: 90%;
-      max-height: 80%;
-    }
-
-    .arrow {
-      position: absolute;
-      top: 50%;
-      font-size: 2.5rem;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .arrow.left { left: 2rem; }
-    .arrow.right { right: 2rem; }
 
     /* books */
     .book {
-      margin: 3rem 0;
+      margin-top: 60px;
     }
 
     .book img {
       width: 220px;
-      margin-bottom: 1rem;
+      margin-bottom: 20px;
     }
 
     .book-title {
-      font-family: 'Lora', serif;
       font-weight: 700;
-      margin-bottom: 0.5rem;
+      margin-bottom: 14px;
     }
 
-    /* boring */
-    .legal h3 {
-      font-family: 'Lora', serif;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .legal p {
+    .shop-links a {
+      display: inline-block;
+      margin: 6px 10px;
+      color: var(--text-soft);
+      text-decoration: none;
       font-size: 0.9rem;
-      line-height: 1.6;
     }
 
-    .spacing {
-      margin-top: 2rem;
+    /* legal */
+    .legal {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+    }
+
+    .legal strong {
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .legal .spacer {
+      margin-top: 30px;
     }
   </style>
 </head>
 
 <body>
 
+  <!-- hero -->
   <section class="hero">
     <div class="fog"></div>
-    <div class="hero-content fade">
-      <h1>ya sama</h1>
-      <div class="subtitle">poetry & music enthusiast</div>
-      <div class="links">
-        <a href="#about">about</a>
-        <a href="#poems">poems</a>
-        <a href="#books">books</a>
-      </div>
+    <h1>ya sama</h1>
+    <div class="subtitle">poetry & music enthusiast</div>
+
+    <div class="buttons">
+      <a href="#about">about</a>
+      <a href="#poems">poems</a>
+      <a href="#books">books</a>
     </div>
   </section>
 
-  <section id="about" class="fade">
-    <img src="portrait.png" alt="portrait" class="portrait">
-    <div class="poem-text">
+  <!-- about -->
+  <section id="about" class="about">
+    <img src="portrait.png" alt="portrait">
+
+    <p>
 a girl from berlin
 with a heart full of lyrics and letters
 and a wish to give them a home
 in a heart of someone else
-    </div>
+    </p>
   </section>
 
-  <section id="poems" class="fade">
-    <h2>poems</h2>
-    <div class="poems-grid">
-      <img src="poem1.png" alt="poem">
-      <img src="poem2.png" alt="poem">
-      <img src="poem3.png" alt="poem">
-    </div>
-    <div class="instagram">
-      <a href="https://instagram.com/YOURNAME" target="_blank">instagram</a>
-    </div>
+  <!-- poems -->
+  <section id="poems" class="poems">
+    <img src="poem1.png" alt="poem">
+    <img src="poem2.png" alt="poem">
+
+    <a class="instagram-link" href="https://instagram.com" target="_blank">
+      instagram
+    </a>
   </section>
 
-  <section id="books" class="fade">
-    <h2>books</h2>
-    <p>you can shop my books online as beautiful hardcovers and in ebook formats or order them in your local bookshop - thank you ♥️</p>
+  <!-- books -->
+  <section id="books">
+    <p>
+you can shop my books online as beautiful hardcovers and in ebook formats
+or order them in your local bookshop – thank you ♥️
+    </p>
 
     <div class="book">
       <img src="book1.png" alt="proof of existence">
       <div class="book-title">proof of existence</div>
-      <div class="links">
+      <div class="shop-links">
         <a href="#">amazon</a>
         <a href="#">thalia</a>
         <a href="#">hugendubel</a>
@@ -289,60 +270,27 @@ in a heart of someone else
     <div class="book">
       <img src="book2.png" alt="running with scissors">
       <div class="book-title">running with scissors</div>
-      <p>coming soon ✨</p>
+      <div>coming soon ✨</div>
     </div>
   </section>
 
-  <section class="legal fade">
-    <h3>impressum</h3>
-    <p>
-      angaben gemäß § 5 ddg:<br><br>
-      ya sama<br>
-      c/o autorenservices.de<br>
-      birkenallee 24<br>
-      36037 fulda<br><br>
-      telefon: +49 30 54000438<br>
-      e-mail: yasama@yasama.de
-    </p>
+  <!-- legal -->
+  <section class="legal">
+    <strong>impressum</strong>
 
-    <div class="spacing"></div>
+    Angaben gemäß § 5 DDG:<br><br>
+    ya sama<br>
+    c/o AutorenServices.de<br>
+    Birkenallee 24<br>
+    36037 Fulda<br><br>
 
-    <h3>haftungsausschluss & datenschutzerklärung</h3>
+    Telefon: +49 30 54000438<br>
+    e-mail: yasama@yasama.de
+
+    <div class="spacer"></div>
+
+    <strong>haftungsausschluss & datenschutzerklärung</strong>
   </section>
-
-  <!-- lightbox -->
-  <div class="lightbox" id="lightbox">
-    <span class="arrow left" onclick="prevImg()">‹</span>
-    <img id="lightbox-img">
-    <span class="arrow right" onclick="nextImg()">›</span>
-  </div>
-
-  <script>
-    const images = document.querySelectorAll('.poems-grid img');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    let current = 0;
-
-    images.forEach((img, i) => {
-      img.onclick = () => {
-        current = i;
-        lightboxImg.src = img.src;
-        lightbox.style.display = 'flex';
-      };
-    });
-
-    function nextImg() {
-      current = (current + 1) % images.length;
-      lightboxImg.src = images[current].src;
-    }
-
-    function prevImg() {
-      current = (current - 1 + images.length) % images.length;
-      lightboxImg.src = images[current].src;
-    }
-
-    lightbox.onclick = () => lightbox.style.display = 'none';
-  </script>
 
 </body>
 </html>
